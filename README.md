@@ -27,10 +27,11 @@ if __name__ == "__main__":
     """
 ```    
     
-    https://github.com/yf8899/yf8899.github.io/issues/1
+
+https://github.com/yf8899/yf8899.github.io/issues/1
     https://github.com/MCQTSS/DouYinVideoURL/issues/1
-    
-    从抖音app分享视频，复制链接是一个`https://v.douyin.com/HO1SGREMIQU` 链接，浏览器再打开他，会跳转到
+
+从抖音app分享视频，复制链接是一个`https://v.douyin.com/HO1SGREMIQU` 链接，浏览器再打开他，会跳转到
     `https://www.douyin.com/video/7448816576188419378?previous_page=app_code_link`
     
     ```
@@ -341,3 +342,73 @@ def get_final_video_url(short_url):
 # 使用示例
 print(get_final_video_url("https://v.douyin.com/HO1SGREMIQU/"))
 ```
+
+使用curl -L 可以直接下载重定向后的链接，不用再使用较长的视频cdn链接：
+
+```
+import re
+import json
+import requests
+
+def extract_douyin_url(text):
+    """从文本中提取抖音短链接"""
+    match = re.search(r'https?://v\.douyin\.com/[a-zA-Z0-9_\-/]+', text)
+    return match.group(0) if match else None
+
+def get_douyin_curl(input_text, ratio='1080p'):
+    """获取抖音视频下载的curl命令"""
+    # 1. 提取纯净URL
+    clean_url = extract_douyin_url(input_text)
+    if not clean_url:
+        print("错误：未找到有效的抖音链接")
+        return
+
+    print(f"提取的抖音链接: {clean_url}")
+
+    # 2. 获取页面内容
+    try:
+        html = requests.get(
+            clean_url, 
+            headers={'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 15_0 like Mac OS X)'},
+            allow_redirects=True
+        ).text
+    except Exception as e:
+        print(f"请求失败: {e}")
+        return
+
+    # 3. 提取JSON数据
+    try:
+        json_data = json.loads(re.search(r'_ROUTER_DATA\s*=\s*({.+?})\s*;', html).group(1))
+    except:
+        print("解析JSON失败")
+        return
+
+    # 4. 查找视频URI
+    stack = [json_data]
+    while stack:
+        data = stack.pop()
+        if isinstance(data, dict):
+            if 'video' in data and 'play_addr' in data['video']:
+                video_uri = data['video']['play_addr']['uri']
+                play_url = f"https://aweme.snssdk.com/aweme/v1/play/?video_id={video_uri}&ratio={ratio}"
+                print(f"\n视频ID: {video_uri}")
+                print("使用此命令下载（自动处理重定向）：")
+                print(f"curl -L '{play_url}' -H 'Referer: https://www.douyin.com/' -o douyin_video.mp4")
+                return
+            stack.extend(data.values())
+        elif isinstance(data, list):
+            stack.extend(data)
+
+    print("未找到视频信息")
+
+# 使用示例
+input1 = "https://v.douyin.com/HO1SGREMIQU/"
+input2 = "2.58 复制打开抖音，看看【会做甜品的小云南的作品】# 菏泽一中# 菏泽高中# 恰巴塔# 学校食堂# ... https://v.douyin.com/-UqU0hdTOh8/ UlP:/ 10/12 n@D.hB"
+
+get_douyin_curl(input1)  # 处理纯URL
+get_douyin_curl(input2)  # 处理包含URL的文本
+```
+
+输出打印：`curl -L 'https://aweme.snssdk.com/aweme/v1/play/?video_id=v0200fg10000d0o5isvog65j30ug44mg&ratio=1080p' -H 'Referer: https://www.douyin.com/' -o douyin_video.mp4`
+
+其中&ratio=1080p默认720p可换1080p
