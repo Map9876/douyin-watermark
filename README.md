@@ -413,3 +413,14 @@ get_douyin_curl(input2)  # 处理包含URL的文本
 输出打印：`curl -L 'https://aweme.snssdk.com/aweme/v1/play/?video_id=v0200fg10000d0o5isvog65j30ug44mg&ratio=1080p' -H 'Referer: https://www.douyin.com/' -o douyin_video.mp4`
 
 其中&ratio=1080p默认720p可换1080p
+
+
+https://douyin.wtf/api/douyin/web/fetch_one_video?aweme_id=7507166845179415845
+
+搜索2160 关键词 找到：
+
+`bit_rate":[{"FPS":29,"HDR_bit":"","HDR_type":"","bit_rate":2609707,"format":"mp4","gear_name":"adapt_lowest_4_1","is_bytevc1":1,"is_h265":1,"play_addr":{"data_size":376034063,"file_cs":"c:0-947869-74b3|a:v0200fg10000d0nd0vnog65s0g9k36kg","file_hash":"74cabc68c425c171d8592aeb20c266d7","height":2160,"uri":"v0200fg10000d0nd0vnog65s0g9k36kg","url_key":"v0200fg10000d0nd0vnog65s0g9k36kg_bytevc1_4k_2609707","url_list":["https://v5-dy-o-abtest.zjcdn.com/99a816b1ed5127bd9d536d8784304a44/68331dac/video/tos/cn/tos-cn-ve-15/oEBsvABw2CVYNiE0QFivABg0mn6ngpIBemB8Af/?a=6383&ch=26&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=2548&bt=2548&cs=2&ds=10&ft=CZdgCYlIDyjNNRVQ9wTkQTyhd._33cAg3-ApQX&mime_type=video_mp4&qs=15&rc=aDs5aTtnZjo5ODQ4aDVlZ0BpajluanY5cnlnMzMzNGkzM0AxXmAtXzReNTYxMmFfM15hYSNoMDYtMmRrLWthLS1kLS9zcw%3D%3D&btag=80000e00038000&cquery=100o_100w_100B_100H_100K&dy_q=1748168444&feature_id=10cf95ef75b4f3e7eac623e4ea0ea691&l=202505251820441DD91332211A56296233","https://v5-dy-o-abtest.zjcdn.com/99a816b1ed5127bd9d536d8784304a44/68331dac/video/tos/cn/tos-cn-ve-15/oEBsvABw2CVYNiE0QFivABg0mn6ngpIBemB8Af/?a=6383&ch=26&cr=3&dr=0&lr=all&cd=0%7C0%7C0%7C3&cv=1&br=2548&bt=2548&cs=2&ds=10&ft=CZdgCYlIDyjNNRVQ9wTkQTyhd._33cAg3-ApQX&mime_type=video_mp4&qs=15&rc=aDs5aTtnZjo5ODQ4aDVlZ0BpajluanY5cnlnMzMzNGkzM0AxXmAtXzReNTYxMmFfM15hYSNoMDYtMmRrLWthLS1kLS9zcw%3D%3D&btag=80000e00038000&cquery=100H_100K_100o_100w_100B&dy_q=1748168444&feature_id=10cf95ef75b4f3e7eac623e4ea0ea691&l=202505251820441DD91332211A56296233","https://www.douyin.com/aweme/v1/play/?video_id=v0200fg10000d0nd0vnog65s0g9k36kg&line=0&file_id=ddab62bed551459687ac7db80fc6a84e&sign=74cabc68c425c171d8592aeb20c266d7&is_play_url=1&source=PackSourceEnum_AWEME_DETAIL"],"width":3840},"quality_type":72`
+
+
+视频链接：
+https://www.douyin.com/aweme/v1/play/?video_id=v0200fg10000d0nd0vnog65s0g9k36kg&line=0&file_id=ddab62bed551459687ac7db80fc6a84e&sign=74cabc68c425c171d8592aeb20c266d7&is_play_url=1&source=PackSourceEnum_AWEME_DETAIL
